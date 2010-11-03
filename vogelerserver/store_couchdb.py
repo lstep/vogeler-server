@@ -11,6 +11,10 @@ import json,yaml
 # Configure Logs
 log = logging.getLogger('vogeler-server')
 
+# Correct problem with urlparse in python < 2.6
+SCHEME="couch"
+urlparse.uses_netloc.append(SCHEME)
+urlparse.uses_fragment.append(SCHEME)
 
 class SystemRecord(couch.Document):
     """
