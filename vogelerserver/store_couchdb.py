@@ -42,6 +42,14 @@ class Store(object):
         SystemRecord.set_db(self.db)
         log.info("Established CouchDB connection to %s" % dsn_couchdb)
 
+    def get(self, node_name):
+        """ Retrieves a node_name, return None if does not exist """
+        try:
+            node = SystemRecord.get(node_name)
+        except couch.resource.ResourceNotFound:
+            return None
+        return node
+
     def create(self,node_name):
         # @TODO: Not good, go inside each time then updates the created_at
         log.debug("Doing db.create(%s)" % node_name)

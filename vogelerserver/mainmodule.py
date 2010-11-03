@@ -82,7 +82,8 @@ class Manager:
 
             log.info("Incoming message from: %s" % syskey)
 
-            self.db.create(syskey)
+            if not self.db.get(syskey):
+                self.db.create(syskey)
 
             for k, v in response.iteritems():
                 try:
