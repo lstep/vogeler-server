@@ -93,7 +93,7 @@ class Store(object):
         return value
 
     def _update_string(self, node, key, value):
-        return value
+        return value.strip()
 
 
 if __name__ == '__main__':
