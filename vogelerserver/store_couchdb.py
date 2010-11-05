@@ -55,7 +55,6 @@ class Store(object):
         return node
 
     def create(self,node_name):
-        # @TODO: Not good, go inside each time then updates the created_at
         log.debug("Doing db.create(%s)" % node_name)
         node = SystemRecord.get_or_create(node_name)
         node['system_name'] = node_name
@@ -64,7 +63,6 @@ class Store(object):
 
     def update(self, node_name, key, value, message_format):
         log.debug("Doing db.update(%s, %s, xxx, %s)" % (node_name,key,message_format))
-        # @TODO: IMPLEMENT MESSAGEFORMAT
         node = SystemRecord.get_or_create(node_name)
 
         try:
@@ -74,6 +72,7 @@ class Store(object):
             log.warn("Don't know how to handle datatype: '%r'" % message_format)
 
         node[key] = data
+        node[key+'_updated_at'] = datetime.datetime.utcnow()
         node['updated_at'] = datetime.datetime.utcnow()
         node.save()
 
