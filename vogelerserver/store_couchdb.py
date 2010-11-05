@@ -80,6 +80,21 @@ class Store(object):
     def _update_yaml(self, node, key, value):
         return yaml.load(value)
 
+    def _update_pylist(self, node, key, value):
+        return value
+
+    def _update_pydict(self, node, key, value):
+        return value
+
+    def _update_json(self, node, key, value):
+        return json.loads(value)
+
+    def _update_raw(self, node, key, value):
+        return value
+
+    def _update_string(self, node, key, value):
+        return value
+
 
 if __name__ == '__main__':
     store = Store()
